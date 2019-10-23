@@ -28,7 +28,7 @@ The following clients must be installed on the machine used to follow this tutor
 Clone this repo:
 
 ```
-git clone https://github.com/kelseyhightower/consul-on-kubernetes.git
+git clone https://github.com/junc23/consul-on-kubernetes.git
 ```
 
 Change into the `consul-on-kubernetes` directory:
@@ -112,6 +112,16 @@ kubectl apply -f clusterroles/consul.yaml
 ```
 
 ### Create the Consul StatefulSet
+Prepare
+```
+mkdir /consul
+mkdir /consul/data
+mkdir /etc/consul
+mkdir /etc/consul/config
+mkdir /etc/tls
+cp ca-key.pem ca.pem consul-key.pem consul.pem /etc/tls
+cp configs/server.json /etc/consul/config
+```
 
 Deploy a three (3) node Consul cluster using a StatefulSet:
 
@@ -179,4 +189,17 @@ Run the `cleanup` script to remove the Kubernetes resources created during this 
 
 ```
 bash cleanup
+```
+
+## FAQ
+1. cfssl: command not found 
+```
+curl -s -L -o /bin/cfssl https://pkg.cfssl.org/R1.2/cfssl_linux-amd64
+curl -s -L -o /bin/cfssljson https://pkg.cfssl.org/R1.2/cfssljson_linux-amd64
+curl -s -L -o /bin/cfssl-certinfo https://pkg.cfssl.org/R1.2/cfssl-certinfo_linux-amd64
+chmod +x /bin/cfssl*
+```
+2. consul: command not found
+```
+download and install from https://www.consul.io/downloads.html
 ```
