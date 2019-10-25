@@ -93,6 +93,11 @@ Store the Consul server configuration file in a ConfigMap:
 kubectl create configmap consul --from-file=configs/server.json
 ```
 
+### Create the PVC before create Consul service and statefulSet
+```
+kubectl create -f pvc/pvc.yaml 
+```
+
 ### Create the Consul Service
 
 Create a headless service to expose each Consul member internally to the cluster:
